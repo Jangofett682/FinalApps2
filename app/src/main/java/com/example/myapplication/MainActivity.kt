@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Spinner
@@ -15,6 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,15 +39,14 @@ class MainActivity : AppCompatActivity() {
         RcVw.adapter = adapter
 
 
-        getPlaylist()
-
         adapter.onItemClickListener = { Data  ->
             val intent = Intent(this, MainActivity2::class.java)
             intent.putExtra("title", Data.title)
-            intent.putExtra("artist", Data.artist.name )
+            intent.putExtra("artist", Data.artist.name)
             intent.putExtra("album", Data.album.title)
             startActivity(intent)
         }
+        getPlaylist()
     }
 
     private fun getPlaylist()
@@ -61,7 +62,6 @@ class MainActivity : AppCompatActivity() {
                     Pl?.forEach{
                         playlist.add(it)
                     }
-                    val tracks = response?.tracks
                     val title = response?.title
                     val count = response?.nb_tracks
 

@@ -26,10 +26,10 @@ class MainActivity2 : AppCompatActivity() {
 
         val bundle = intent.extras
 
+
         val can = bundle?.getString("title")
         val art = bundle?.getString("artist")
         val alb = bundle?.getString("album")
-
         TxVwCancion.text = can
         TxVwArtista.text = art
         TxVwAlbum.text = alb

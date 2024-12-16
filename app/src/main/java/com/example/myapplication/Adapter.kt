@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class Adapter(private val playlist: List<Data>) : RecyclerView.Adapter<Adapter.ViewHolder>()
 {
-    lateinit var onItemClickListener: (Data) -> Unit
+     var onItemClickListener: ((Data) -> Unit)? = null
 
     inner class ViewHolder(val view: View): RecyclerView.ViewHolder(view)
     {
@@ -27,7 +27,6 @@ class Adapter(private val playlist: List<Data>) : RecyclerView.Adapter<Adapter.V
             textViewTitle.text = data.title
             textViewArtist.text = data.artist.name
             textViewAlbum.text = data.album.title
-           // ImageAlbum.context = data.album.cover
         }
     }
 
@@ -37,8 +36,12 @@ class Adapter(private val playlist: List<Data>) : RecyclerView.Adapter<Adapter.V
     }
 
     override fun onBindViewHolder(holder: Adapter.ViewHolder, position: Int) {
-        val playlist = playlist[position]
-        holder.bind(playlist)
+        val item = playlist[position]
+        holder.bind(item)
+
+        holder.itemView.setOnClickListener{
+            onItemClickListener?.invoke(item)
+        }
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.media.Image
+import retrofit2.http.Url
 
 data class Playlist
     (
